@@ -7,7 +7,7 @@
 # endif
 
 //-----------------------------------------------------------PROTOTYPE------------------------------------------------------------
-char	*get_next_line(int fd);
+char	*read_line(int fd);
 char	*ft_read_to_left_str(int fd, char *left_str);
 char	*ft_strchr(char *s, int c);
 char	*ft_strjoin(char *left_str, char *buff);
@@ -34,16 +34,16 @@ char	*ft_strchr(char *s, int c)
 
 	i = 0;
 	if (!s)
-		return (0);
+		return NULL;
 	if (c == '\0')
-		return ((char *)&s[ft_strlen(s)]);
+		return ((char *)&s[ft_strlen(s)]); 
 	while (s[i] != '\0')
 	{
 		if (s[i] == (char) c)
 			return ((char *)&s[i]);
 		i++;
 	}
-	return (0);
+	return NULL;
 }
 
 char	*ft_strjoin(char *left_str, char *buff)
