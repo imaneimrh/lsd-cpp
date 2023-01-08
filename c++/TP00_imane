@@ -1,0 +1,168 @@
+#include <iostream>
+using namespace std;
+
+//======================EXERCICE1
+typedef struct node{
+    int element;
+    struct node* next;
+
+}node;
+typedef node* stack; 
+
+void printlist(stack L){
+    stack temp;
+    temp = L;
+    while(temp!=NULL){
+        cout<<temp->element<<" ";
+        temp=temp->next;
+    }
+    return;
+}
+
+
+void push(stack* L, int x){
+    node* add;
+    add = (node*)malloc(sizeof(node));
+    add->element = x;
+    if((*L)==NULL){
+        add->next = NULL;
+        (*L) = add;
+    }
+    else{
+        add->next = (*L);
+        (*L) = add; 
+    }
+    return;
+}
+
+void pop(stack* L){
+    if((*L) == NULL){
+        cout<<"Empty list";
+    }
+    else{
+        stack temp;
+        temp = (*L);
+        cout<<" "<<temp->element;
+        (*L) = (*L)->next;
+        free(temp);
+    }
+    return;
+}
+
+//======================EXERCICE2 
+node* reverse(node* head, int k)
+{
+    if (!head)
+        return NULL;
+    node* current = head;
+    node* next = NULL;
+    node* prev = NULL;
+    int count = 0;
+    while (current != NULL && count++ < k) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+        count++;
+    }
+    if (next != NULL)
+        head->next = reverse(next, k);
+    return prev;
+}
+
+//======================EXERCICE3
+
+int search(stack L, int x){
+    stack temp = L;
+    while(temp!=NULL){
+        //cout<<"element of temp: "<<temp->element<<endl;
+        if(temp->element == x)
+            return 0;
+        temp=temp->next;
+    }
+    return 1;
+}
+
+stack eliminate_d(stack L){
+    stack temp, R;
+    temp = L;
+    R = NULL;
+    while(temp!=NULL){
+        if(search(R, temp->element)==1){
+            push(&R, temp->element);
+        }
+        temp=temp->next;
+    }
+    return R;
+}
+
+
+
+
+
+int main(){
+//======================TEST: EXERCICE1
+    cout<<endl<<"~~~~~~exo 1 test ~~~~~~"<<endl;
+    cout<<endl;
+
+    stack L;
+    L = NULL;
+    push(&L,1);
+    push(&L, 5);
+    push(&L, 4);
+    push(&L, 6);
+    push(&L, 7);
+    push(&L, 1);
+    push(&L, 5);
+    push(&L, 3);
+
+
+
+
+
+    cout<<"Show list initially created by self-implemented functions of push:"<<endl;
+
+    printlist(L);
+    //pop(&L);
+    cout<<'\n';
+    //printlist(L);
+//======================TEST: EXERCICE2
+    cout<<endl<<"~~~~~~exo 2 test ~~~~~~"<<endl;
+    cout<<endl;
+    cout<<"reverse elements by k groups:"<<endl;
+    L=reverse(L, 3);
+    printlist(L);
+    cout<<endl;
+
+
+
+//======================TEST: EXERCICE3
+    cout<<endl<<"~~~~~~exo 3 test ~~~~~~"<<endl;
+    cout<<endl;
+    cout<<"eliminate duplicates of this list:"<<endl;
+    cout<<endl;
+
+    stack R = NULL;
+    stack L1 = NULL;
+    L1 = NULL;
+    push(&L1,1);
+    push(&L1, 5);
+    push(&L1, 4);
+    push(&L1, 6);
+    push(&L1, 6);
+    push(&L1, 41);
+    push(&L1, 5);
+    push(&L1, 3);
+    R = eliminate_d(L1);
+    printlist(L1);
+    cout<<endl;
+    cout<<endl;
+
+    cout<<"result:"<<endl;
+    cout<<endl;
+    printlist(R);
+
+
+
+    return 0;
+}
