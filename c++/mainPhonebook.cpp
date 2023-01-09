@@ -1,5 +1,5 @@
-#include "/home/imane/contact2.hpp"
-#include "/home/imane/phonebook2.hpp"
+#include "contact2.hpp"
+#include "phonebook2.hpp"
 
 int main(){
     phonebook P;
