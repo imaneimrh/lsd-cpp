@@ -23,7 +23,7 @@ int main(){
             L.search();
         }
         if(i==3){
-            cout<<"The program will quit and the contacts will be lost forever!"<<endl;
+            cout<<"The program will quit and the information will be lost forever!"<<endl;
             cout<<"are you sure, you want that (y/n)? : ";
             char r;
             cin>>r;
